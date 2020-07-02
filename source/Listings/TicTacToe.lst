@@ -1,0 +1,350 @@
+C51 COMPILER V9.60.0.0   TICTACTOE                                                         06/10/2020 18:50:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TICTACTOE
+OBJECT MODULE PLACED IN .\Objects\TicTacToe.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE TicTacToe.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\TicTacToe.lst) TABS(2) OBJECT(.\Objects\TicTacToe.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          
+   4          sbit buton1 = P0^0;//Butonlari tanimliyoruz
+   5          sbit buton2 = P0^1;
+   6          sbit buton3 = P0^2;
+   7          sbit buton4 = P0^3;
+   8          sbit buton5 = P0^4;
+   9          sbit buton6 = P0^5;
+  10          sbit buton7 = P0^6;
+  11          sbit buton8 = P0^7;
+  12          sbit buton9 = P3^2;
+  13          
+  14          sbit sariLed1 = P1^0;//Sari led durumlarini tanimliyoruz
+  15          sbit sariLed2 = P1^1;
+  16          sbit sariLed3 = P1^2;
+  17          sbit sariLed4 = P1^3;
+  18          sbit sariLed5 = P1^4;
+  19          sbit sariLed6 = P1^5;
+  20          sbit sariLed7 = P1^6;
+  21          sbit sariLed8 = P1^7;
+  22          sbit sariLed9 = P3^0;
+  23          
+  24          sbit kizilLed1 = P2^0;//Kizil Led durumlarini tanimliyoruz
+  25          sbit kizilLed2 = P2^1;
+  26          sbit kizilLed3 = P2^2;
+  27          sbit kizilLed4 = P2^3;
+  28          sbit kizilLed5 = P2^4;
+  29          sbit kizilLed6 = P2^5;
+  30          sbit kizilLed7 = P2^6;
+  31          sbit kizilLed8 = P2^7;
+  32          sbit kizilLed9 = P3^1;
+  33          
+  34          sbit sira = P3^3;// Siranin hangi renkte oldugunu g�steriyor(0 ise Sari - 1 ise Kizil)
+  35          
+  36          //Skorlari tutan bitler(Maximum 4'e kadar saydirabiliyoruz)
+  37          sbit sariSifir = P3^4; //Sari'nin skorunun 0. biti
+  38          sbit sariBir = P3^5;  //Sari'nin skorunun 1. biti
+  39          sbit kizilSifir = P3^6; //Kizil'in skorunun 0. biti
+  40          sbit kizilBir = P3^7; //Kizil'in skorunun 1. biti
+  41          
+  42          void kesme() interrupt 1{// Butona basma anlarında tekrarlama olmasın diye oyun esnasında kısa aralık
+             -lar veriyor
+  43   1        int i;
+  44   1        for(i=0; i<50;i++){
+  45   2          TMOD = 0x01; //timer0 mod 1'de �alisacak
+  46   2          TH0= 0xFC;          
+  47   2          TL0 = 0x66;   
+  48   2        }
+  49   1      }
+  50          void bekle(){// Gecikme - Delay
+  51   1        int i;
+  52   1        for(i=0; i<150;i++){
+  53   2          TMOD = 0x10; //timer1 mod 1'de �alisacak
+C51 COMPILER V9.60.0.0   TICTACTOE                                                         06/10/2020 18:50:59 PAGE 2   
+
+  54   2          TH1= 0xFC;          
+  55   2          TL1 = 0x66;
+  56   2          TR1=1;
+  57   2          while(TF1==0);
+  58   2          TF1=0;
+  59   2          TR1=0;
+  60   2        }
+  61   1      }
+  62          void sifirla(){// Skor hari� b�t�n pinler sifirlanir
+  63   1        P0=0x00;
+  64   1        P1=0x00;
+  65   1        P2=0x00;
+  66   1        sariLed9=0;
+  67   1        kizilLed9=0;
+  68   1        buton9=0;
+  69   1        sira=0;
+  70   1      }
+  71          void skorSifirla(){// Skor sifirlanir
+  72   1        sariBir = 0;
+  73   1        sariSifir = 0;
+  74   1        kizilBir = 0;
+  75   1        kizilSifir=0;
+  76   1      }
+  77          
+  78          void sariHesapla(){//Sarinin skorunun hesaplanmasi
+  79   1        if(sariBir ==0 && sariSifir== 0){
+  80   2          sariSifir = 1;
+  81   2        }else if(sariBir ==0 && sariSifir== 1){
+  82   2          sariBir = 1;
+  83   2          sariSifir=0;
+  84   2        }else if(sariBir ==1 && sariSifir== 0){
+  85   2          sariSifir = 1;
+  86   2        }else{
+  87   2          skorSifirla();
+  88   2        }
+  89   1      }
+  90          void kizilHesapla(){ //Kizil'in skorunun hesaplanmasi
+  91   1        if(kizilBir ==0 && kizilSifir== 0){
+  92   2          kizilSifir = 1;
+  93   2        }else if(kizilBir ==0 && kizilSifir== 1){
+  94   2          kizilBir = 1;
+  95   2          kizilSifir = 0;
+  96   2        }else if(kizilBir ==1 && kizilSifir== 0){
+  97   2          kizilSifir = 1;
+  98   2        }else{
+  99   2          skorSifirla();
+ 100   2        }
+ 101   1      }
+ 102          
+ 103          void butunLedlerSari(){//B�t�n ledler sari yanar
+ 104   1        P1=0xFF;
+ 105   1        sariLed9=1;
+ 106   1        P2=0x00;
+ 107   1        kizilLed9=0;
+ 108   1      }
+ 109          void butunLedlerKizil(){//B�t�n ledler kizil yanar
+ 110   1        P1=0x00;
+ 111   1        sariLed9=0;
+ 112   1        P2=0xFF;
+ 113   1        kizilLed9=1;
+ 114   1      }
+ 115          void butunLedlerSonuk(){// B�t�n ledler s�ner
+C51 COMPILER V9.60.0.0   TICTACTOE                                                         06/10/2020 18:50:59 PAGE 3   
+
+ 116   1        P1=0x00;
+ 117   1        sariLed9=0;
+ 118   1        P2=0x00;
+ 119   1        kizilLed9=0;
+ 120   1      }
+ 121          void sariKontrol(){//Sari'nin kazanma kontrol�
+ 122   1        if(
+ 123   1          (sariLed1 ==1 && sariLed2 ==1 && sariLed3 ==1) || 
+ 124   1          (sariLed4 ==1 && sariLed5 ==1 && sariLed6 ==1) ||
+ 125   1          (sariLed7 ==1 && sariLed8 ==1 && sariLed9 ==1) ||
+ 126   1          (sariLed1 ==1 && sariLed4 ==1 && sariLed7 ==1) ||
+ 127   1          (sariLed2 ==1 && sariLed5 ==1 && sariLed8 ==1) ||
+ 128   1          (sariLed3 ==1 && sariLed6 ==1 && sariLed9 ==1) ||
+ 129   1          (sariLed1 ==1 && sariLed5 ==1 && sariLed9 ==1) ||
+ 130   1          (sariLed3 ==1 && sariLed5 ==1 && sariLed7 ==1))
+ 131   1        {
+ 132   2          long x;
+ 133   2          for( x = 0; x<3; x++){
+ 134   3            butunLedlerSari();
+ 135   3            bekle();
+ 136   3            butunLedlerSonuk();
+ 137   3            bekle();
+ 138   3          }
+ 139   2          sariHesapla();
+ 140   2          sifirla();
+ 141   2        }
+ 142   1      }
+ 143          void kizilKontrol(){//Kizil'nin kazanma kontrol�
+ 144   1        if(
+ 145   1          (kizilLed1 ==1 && kizilLed2 ==1 && kizilLed3 ==1) || 
+ 146   1          (kizilLed4 ==1 && kizilLed5 ==1 && kizilLed6 ==1) ||
+ 147   1          (kizilLed7 ==1 && kizilLed8 ==1 && kizilLed9 ==1) ||
+ 148   1          (kizilLed1 ==1 && kizilLed4 ==1 && kizilLed7 ==1) ||
+ 149   1          (kizilLed2 ==1 && kizilLed5 ==1 && kizilLed8 ==1) ||
+ 150   1          (kizilLed3 ==1 && kizilLed6 ==1 && kizilLed9 ==1) ||
+ 151   1          (kizilLed1 ==1 && kizilLed5 ==1 && kizilLed9 ==1) ||
+ 152   1          (kizilLed3 ==1 && kizilLed5 ==1 && kizilLed7 ==1))
+ 153   1        {
+ 154   2          long x;
+ 155   2          for( x = 0; x<3; x++){
+ 156   3            butunLedlerKizil();
+ 157   3            bekle();
+ 158   3            butunLedlerSonuk();
+ 159   3            bekle();
+ 160   3          }
+ 161   2          kizilHesapla();
+ 162   2          sifirla();
+ 163   2        }
+ 164   1      }
+ 165          void beraberlikKontrol(){ //Beraberlik durumunu kontrol eder ve eger berabere ise ledleri s�nd�r�r.
+ 166   1        if((kizilLed1 == 1 || sariLed1==1) &&
+ 167   1          (kizilLed2 == 1 || sariLed2==1) &&
+ 168   1          (kizilLed3 == 1 || sariLed3==1) &&
+ 169   1          (kizilLed4 == 1 || sariLed4==1) &&
+ 170   1          (kizilLed5 == 1 || sariLed5==1) &&
+ 171   1          (kizilLed6 == 1 || sariLed6==1) &&
+ 172   1          (kizilLed7 == 1 || sariLed7==1) &&
+ 173   1          (kizilLed8 == 1 || sariLed8==1) &&
+ 174   1          (kizilLed9 == 1 || sariLed9==1))
+ 175   1          {
+ 176   2            sifirla();
+ 177   2            bekle();
+C51 COMPILER V9.60.0.0   TICTACTOE                                                         06/10/2020 18:50:59 PAGE 4   
+
+ 178   2            bekle();
+ 179   2          }
+ 180   1      }
+ 181          
+ 182          void main(void){
+ 183   1        TMOD = 0x01; //timer0 mod 1'de �alisacak (kesme işlemi için)
+ 184   1        TH0= 0xFC;  //ayarlanıyor
+ 185   1        TL0 = 0x66; //ayarlanıyor
+ 186   1        ET0=1; //timer kesmesi aktif
+ 187   1        EA=1; //kesmeler aktif
+ 188   1        TR0 = 1;  //timer 1 akfif
+ 189   1        
+ 190   1        sifirla(); //Ledler ve butonlar sıfırlanır
+ 191   1        skorsifirla(); // Skor sifirlanır
+*** WARNING C206 IN LINE 191 OF TicTacToe.c: 'skorsifirla': missing function-prototype
+ 192   1        while(1){
+ 193   2          if(buton1 == 1){
+ 194   3            if(sariLed1 != 1 && kizilLed1 != 1){
+ 195   4              if(sira==0){
+ 196   5                sariLed1=1;
+ 197   5                kizilLed1=0;
+ 198   5                sira =1;
+ 199   5              }else{
+ 200   5                sariLed1=0;
+ 201   5                kizilLed1=1;
+ 202   5                sira =0;
+ 203   5              }
+ 204   4            }
+ 205   3          }
+ 206   2          if(buton2 == 1){
+ 207   3            if(sariLed2 != 1 && kizilLed2 != 1){
+ 208   4              if(sira==0){
+ 209   5                  sariLed2=1;
+ 210   5                  kizilLed2=0;
+ 211   5                  sira =1;
+ 212   5              }else{
+ 213   5                sariLed2=0;
+ 214   5                kizilLed2=1;
+ 215   5                sira =0;
+ 216   5              }
+ 217   4            }
+ 218   3          }
+ 219   2          if(buton3 == 1){
+ 220   3            if(sariLed3 != 1 && kizilLed3 != 1){
+ 221   4              if(sira==0){
+ 222   5                  sariLed3=1;
+ 223   5                  kizilLed3=0;
+ 224   5                  sira =1;
+ 225   5              }else{
+ 226   5                sariLed3=0;
+ 227   5                kizilLed3=1;
+ 228   5                sira =0;
+ 229   5              }
+ 230   4            }
+ 231   3          }
+ 232   2          if(buton4 == 1){
+ 233   3            if(sariLed4 != 1 && kizilLed4 != 1){
+ 234   4              if(sira==0){
+ 235   5                  sariLed4=1;
+ 236   5                  kizilLed4=0;
+ 237   5                  sira =1;
+ 238   5              }else{
+C51 COMPILER V9.60.0.0   TICTACTOE                                                         06/10/2020 18:50:59 PAGE 5   
+
+ 239   5                sariLed4=0;
+ 240   5                kizilLed4=1;
+ 241   5                sira =0;
+ 242   5              }
+ 243   4            }
+ 244   3          }
+ 245   2          if(buton5 == 1){
+ 246   3            if(sariLed5 != 1 && kizilLed5 != 1){
+ 247   4              if(sira==0){
+ 248   5                  sariLed5=1;
+ 249   5                  kizilLed5=0;
+ 250   5                  sira =1;
+ 251   5              }else{
+ 252   5                sariLed5=0;
+ 253   5                kizilLed5=1;
+ 254   5                sira =0;
+ 255   5              }
+ 256   4            }
+ 257   3          }
+ 258   2          if(buton6 == 1){
+ 259   3            if(sariLed6 != 1 && kizilLed6 != 1){
+ 260   4              if(sira==0){
+ 261   5                  sariLed6=1;
+ 262   5                  kizilLed6=0;
+ 263   5                  sira =1;
+ 264   5              }else{
+ 265   5                sariLed6=0;
+ 266   5                kizilLed6=1;
+ 267   5                sira =0;
+ 268   5              }
+ 269   4            }
+ 270   3          }
+ 271   2          if(buton7 == 1){
+ 272   3            if(sariLed7 != 1 && kizilLed7 != 1){
+ 273   4              if(sira==0){
+ 274   5                  sariLed7=1;
+ 275   5                  kizilLed7=0;
+ 276   5                  sira =1;
+ 277   5              }else{
+ 278   5                sariLed7=0;
+ 279   5                kizilLed7=1;
+ 280   5                sira =0;
+ 281   5              }
+ 282   4            }
+ 283   3          }
+ 284   2          if(buton8 == 1){
+ 285   3            if(sariLed8 != 1 && kizilLed8 != 1){
+ 286   4              if(sira==0){
+ 287   5                  sariLed8=1;
+ 288   5                  kizilLed8=0;
+ 289   5                  sira =1;
+ 290   5              }else{
+ 291   5                sariLed8=0;
+ 292   5                kizilLed8=1;
+ 293   5                sira =0;
+ 294   5              }
+ 295   4            }
+ 296   3          }
+ 297   2          if(buton9 == 1){
+ 298   3            if(sariLed9 != 1 && kizilLed9 != 1){
+ 299   4              if(sira==0){
+ 300   5                  sariLed9=1;
+C51 COMPILER V9.60.0.0   TICTACTOE                                                         06/10/2020 18:50:59 PAGE 6   
+
+ 301   5                  kizilLed9=0;
+ 302   5                  sira =1;
+ 303   5              }else{
+ 304   5                sariLed9=0;
+ 305   5                kizilLed9=1;
+ 306   5                sira =0;
+ 307   5              }
+ 308   4            }
+ 309   3          }
+ 310   2          kizilKontrol();
+ 311   2          sariKontrol();
+ 312   2          beraberlikKontrol();
+ 313   2        }
+ 314   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    818    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

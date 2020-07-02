@@ -1,0 +1,78 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/06/2020  21:09:16  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\TicTacToe.obj TO .\Objects\TicTacToea PRINT (.\Listings\TicTacToea.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\TicTacToe.obj (TICTACTOE)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\TicTacToea (TICTACTOE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     000CH     UNIT         ?C_C51STARTUP
+            CODE    080CH     0009H     UNIT         ?PR?MAIN?TICTACTOE
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\TicTacToea (TICTACTOE)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TICTACTOE
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\TicTacToea (TICTACTOE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TICTACTOE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:080CH         PUBLIC        main
+  B:0080H.0       PUBLIC        led1
+  B:00B0H.0       PUBLIC        led9
+  B:00A0H.0       PUBLIC        btn1
+  -------         PROC          MAIN
+  C:080CH         LINE#         25
+  C:080CH         LINE#         26
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/06/2020  21:09:16  PAGE 2
+
+
+  C:080EH         LINE#         27
+  C:080EH         LINE#         28
+  C:0811H         LINE#         29
+  C:0813H         LINE#         30
+  C:0813H         LINE#         31
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TICTACTOE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0009H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=24
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

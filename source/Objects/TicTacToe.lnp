@@ -1,0 +1,3 @@
+".\Objects\TicTacToe.obj" 
+TO ".\Objects\TicTacToe" 
+PRINT(".\Listings\TicTacToe.m51")

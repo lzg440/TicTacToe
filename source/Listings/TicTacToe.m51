@@ -1,0 +1,472 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    06/10/2020  18:50:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\TicTacToe.obj TO .\Objects\TicTacToe PRINT (.\Listings\TicTacToe.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\TicTacToe.obj (TICTACTOE)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SLCMP)
+
+
+LINK MAP OF MODULE:  .\Objects\TicTacToe (TICTACTOE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     010BH     UNIT         ?PR?MAIN?TICTACTOE
+            CODE    090BH     008DH     UNIT         ?PR?SARIKONTROL?TICTACTOE
+            CODE    0998H     008DH     UNIT         ?PR?KIZILKONTROL?TICTACTOE
+            CODE    0A25H     0040H     UNIT         ?PR?BERABERLIKKONTROL?TICTACTOE
+            CODE    0A65H     002BH     UNIT         ?PR?KESME?TICTACTOE
+            CODE    0A90H     0027H     UNIT         ?PR?BEKLE?TICTACTOE
+            CODE    0AB7H     0021H     UNIT         ?PR?SARIHESAPLA?TICTACTOE
+            CODE    0AD8H     0021H     UNIT         ?PR?KIZILHESAPLA?TICTACTOE
+            CODE    0AF9H     0016H     UNIT         ?C?LIB_CODE
+            CODE    0B0FH     0010H     UNIT         ?PR?SIFIRLA?TICTACTOE
+            CODE    0B1FH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0B2BH     000BH     UNIT         ?PR?BUTUNLEDLERSARI?TICTACTOE
+            CODE    0B36H     000BH     UNIT         ?PR?BUTUNLEDLERKIZIL?TICTACTOE
+            CODE    0B41H     000AH     UNIT         ?PR?BUTUNLEDLERSONUK?TICTACTOE
+            CODE    0B4BH     0009H     UNIT         ?PR?SKORSIFIRLA?TICTACTOE
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\TicTacToe (TICTACTOE)
+
+
+SEGMENT                                   DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH
+-------------------------------------------------------
+?C_C51STARTUP                           -----    -----
+  +--> ?PR?MAIN?TICTACTOE
+
+?PR?MAIN?TICTACTOE                      -----    -----
+  +--> ?PR?SIFIRLA?TICTACTOE
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 2
+
+
+  +--> ?PR?SKORSIFIRLA?TICTACTOE
+  +--> ?PR?KIZILKONTROL?TICTACTOE
+  +--> ?PR?SARIKONTROL?TICTACTOE
+  +--> ?PR?BERABERLIKKONTROL?TICTACTOE
+
+?PR?KIZILKONTROL?TICTACTOE              0008H    0004H
+  +--> ?PR?BUTUNLEDLERKIZIL?TICTACTOE
+  +--> ?PR?BEKLE?TICTACTOE
+  +--> ?PR?KIZILHESAPLA?TICTACTOE
+  +--> ?PR?SIFIRLA?TICTACTOE
+
+?PR?BEKLE?TICTACTOE                     -----    -----
+  +--> ?PR?BUTUNLEDLERSONUK?TICTACTOE
+
+?PR?KIZILHESAPLA?TICTACTOE              -----    -----
+  +--> ?PR?SKORSIFIRLA?TICTACTOE
+
+?PR?SARIKONTROL?TICTACTOE               0008H    0004H
+  +--> ?PR?BUTUNLEDLERSARI?TICTACTOE
+  +--> ?PR?BEKLE?TICTACTOE
+  +--> ?PR?SARIHESAPLA?TICTACTOE
+  +--> ?PR?SIFIRLA?TICTACTOE
+
+?PR?SARIHESAPLA?TICTACTOE               -----    -----
+  +--> ?PR?SKORSIFIRLA?TICTACTOE
+
+?PR?BERABERLIKKONTROL?TICTACTOE         -----    -----
+  +--> ?PR?SIFIRLA?TICTACTOE
+  +--> ?PR?BEKLE?TICTACTOE
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\TicTacToe (TICTACTOE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TICTACTOE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:0090H.5       PUBLIC        sariLed6
+  B:0090H.6       PUBLIC        sariLed7
+  D:0080H         PUBLIC        P0
+  B:0090H.7       PUBLIC        sariLed8
+  D:0090H         PUBLIC        P1
+  B:00B0H.0       PUBLIC        sariLed9
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0A96H         PUBLIC        bekle
+  B:00A8H.7       PUBLIC        EA
+  C:0A25H         PUBLIC        beraberlikKontrol
+  C:0B4BH         PUBLIC        skorSifirla
+  C:0998H         PUBLIC        kizilKontrol
+  C:0B36H         PUBLIC        butunLedlerKizil
+  C:0A65H         PUBLIC        kesme
+  C:090BH         PUBLIC        sariKontrol
+  C:0B2BH         PUBLIC        butunLedlerSari
+  C:0B41H         PUBLIC        butunLedlerSonuk
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 3
+
+
+  C:0800H         PUBLIC        main
+  B:00B0H.6       PUBLIC        kizilSifir
+  B:00B0H.3       PUBLIC        sira
+  B:00B0H.4       PUBLIC        sariSifir
+  D:0089H         PUBLIC        TMOD
+  B:00B0H.7       PUBLIC        kizilBir
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.7       PUBLIC        TF1
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  B:00B0H.5       PUBLIC        sariBir
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  B:0088H.4       PUBLIC        TR0
+  B:0088H.6       PUBLIC        TR1
+  B:0080H.0       PUBLIC        buton1
+  B:0080H.1       PUBLIC        buton2
+  B:0080H.2       PUBLIC        buton3
+  B:0080H.3       PUBLIC        buton4
+  B:0080H.4       PUBLIC        buton5
+  B:0080H.5       PUBLIC        buton6
+  B:0080H.6       PUBLIC        buton7
+  B:0080H.7       PUBLIC        buton8
+  B:00B0H.2       PUBLIC        buton9
+  C:0AD8H         PUBLIC        kizilHesapla
+  C:0B0FH         PUBLIC        sifirla
+  B:00A0H.0       PUBLIC        kizilLed1
+  B:00A0H.1       PUBLIC        kizilLed2
+  B:00A0H.2       PUBLIC        kizilLed3
+  B:00A0H.3       PUBLIC        kizilLed4
+  B:00A0H.4       PUBLIC        kizilLed5
+  B:00A0H.5       PUBLIC        kizilLed6
+  C:0AB7H         PUBLIC        sariHesapla
+  B:00A0H.6       PUBLIC        kizilLed7
+  B:00A0H.7       PUBLIC        kizilLed8
+  B:00B0H.1       PUBLIC        kizilLed9
+  B:0090H.0       PUBLIC        sariLed1
+  B:0090H.1       PUBLIC        sariLed2
+  B:0090H.2       PUBLIC        sariLed3
+  B:0090H.3       PUBLIC        sariLed4
+  B:0090H.4       PUBLIC        sariLed5
+  -------         PROC          KESME
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0A65H         LINE#         42
+  C:0A70H         LINE#         44
+  C:0A73H         LINE#         45
+  C:0A76H         LINE#         46
+  C:0A79H         LINE#         47
+  C:0A7CH         LINE#         48
+  C:0A87H         LINE#         49
+  -------         ENDPROC       KESME
+  -------         PROC          L?0108
+  -------         ENDPROC       L?0108
+  -------         PROC          BEKLE
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 4
+
+
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:0A96H         LINE#         50
+  C:0A96H         LINE#         52
+  C:0A99H         LINE#         53
+  C:0A9CH         LINE#         54
+  C:0A9FH         LINE#         55
+  C:0AA2H         LINE#         56
+  C:0AA4H         LINE#         57
+  C:0AA7H         LINE#         58
+  C:0AA9H         LINE#         59
+  C:0AABH         LINE#         60
+  C:0AB6H         LINE#         61
+  -------         ENDPROC       BEKLE
+  -------         PROC          SIFIRLA
+  C:0B0FH         LINE#         62
+  C:0B0FH         LINE#         63
+  C:0B12H         LINE#         64
+  C:0B14H         LINE#         65
+  C:0B16H         LINE#         66
+  C:0B18H         LINE#         67
+  C:0B1AH         LINE#         68
+  C:0B1CH         LINE#         69
+  C:0B1EH         LINE#         70
+  -------         ENDPROC       SIFIRLA
+  -------         PROC          SKORSIFIRLA
+  C:0B4BH         LINE#         71
+  C:0B4BH         LINE#         72
+  C:0B4DH         LINE#         73
+  C:0B4FH         LINE#         74
+  C:0B51H         LINE#         75
+  C:0B53H         LINE#         76
+  -------         ENDPROC       SKORSIFIRLA
+  -------         PROC          SARIHESAPLA
+  C:0AB7H         LINE#         78
+  C:0AB7H         LINE#         79
+  C:0ABDH         LINE#         80
+  C:0ABFH         LINE#         81
+  C:0AC6H         LINE#         82
+  C:0AC8H         LINE#         83
+  C:0ACAH         LINE#         84
+  C:0AD1H         LINE#         85
+  C:0AD3H         LINE#         86
+  C:0AD4H         LINE#         87
+  C:0AD7H         LINE#         88
+  C:0AD7H         LINE#         89
+  -------         ENDPROC       SARIHESAPLA
+  -------         PROC          KIZILHESAPLA
+  C:0AD8H         LINE#         90
+  C:0AD8H         LINE#         91
+  C:0ADEH         LINE#         92
+  C:0AE0H         LINE#         93
+  C:0AE7H         LINE#         94
+  C:0AE9H         LINE#         95
+  C:0AEBH         LINE#         96
+  C:0AF2H         LINE#         97
+  C:0AF4H         LINE#         98
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 5
+
+
+  C:0AF5H         LINE#         99
+  C:0AF8H         LINE#         100
+  C:0AF8H         LINE#         101
+  -------         ENDPROC       KIZILHESAPLA
+  -------         PROC          BUTUNLEDLERSARI
+  C:0B2BH         LINE#         103
+  C:0B2BH         LINE#         104
+  C:0B2EH         LINE#         105
+  C:0B30H         LINE#         106
+  C:0B33H         LINE#         107
+  C:0B35H         LINE#         108
+  -------         ENDPROC       BUTUNLEDLERSARI
+  -------         PROC          BUTUNLEDLERKIZIL
+  C:0B36H         LINE#         109
+  C:0B36H         LINE#         110
+  C:0B39H         LINE#         111
+  C:0B3BH         LINE#         112
+  C:0B3EH         LINE#         113
+  C:0B40H         LINE#         114
+  -------         ENDPROC       BUTUNLEDLERKIZIL
+  -------         PROC          BUTUNLEDLERSONUK
+  C:0B41H         LINE#         115
+  C:0B41H         LINE#         116
+  C:0B44H         LINE#         117
+  C:0B46H         LINE#         118
+  C:0B48H         LINE#         119
+  C:0B4AH         LINE#         120
+  -------         ENDPROC       BUTUNLEDLERSONUK
+  -------         PROC          SARIKONTROL
+  -------         DO            
+  D:0008H         SYMBOL        x
+  -------         ENDDO         
+  C:090BH         LINE#         121
+  C:090BH         LINE#         122
+  C:0953H         LINE#         131
+  C:0953H         LINE#         133
+  C:0970H         LINE#         134
+  C:0973H         LINE#         135
+  C:0973H         LINE#         136
+  C:0973H         LINE#         137
+  C:0976H         LINE#         138
+  C:0991H         LINE#         139
+  C:0994H         LINE#         140
+  C:0997H         LINE#         141
+  C:0997H         LINE#         142
+  -------         ENDPROC       SARIKONTROL
+  -------         PROC          KIZILKONTROL
+  -------         DO            
+  D:0008H         SYMBOL        x
+  -------         ENDDO         
+  C:0998H         LINE#         143
+  C:0998H         LINE#         144
+  C:09E0H         LINE#         153
+  C:09E0H         LINE#         155
+  C:09FDH         LINE#         156
+  C:0A00H         LINE#         157
+  C:0A00H         LINE#         158
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 6
+
+
+  C:0A00H         LINE#         159
+  C:0A03H         LINE#         160
+  C:0A1EH         LINE#         161
+  C:0A21H         LINE#         162
+  C:0A24H         LINE#         163
+  C:0A24H         LINE#         164
+  -------         ENDPROC       KIZILKONTROL
+  -------         PROC          BERABERLIKKONTROL
+  C:0A25H         LINE#         165
+  C:0A25H         LINE#         166
+  C:0A5BH         LINE#         175
+  C:0A5BH         LINE#         176
+  C:0A5EH         LINE#         177
+  C:0A61H         LINE#         178
+  C:0A64H         LINE#         179
+  C:0A64H         LINE#         180
+  -------         ENDPROC       BERABERLIKKONTROL
+  -------         PROC          MAIN
+  C:0800H         LINE#         182
+  C:0800H         LINE#         183
+  C:0803H         LINE#         184
+  C:0806H         LINE#         185
+  C:0809H         LINE#         186
+  C:080BH         LINE#         187
+  C:080DH         LINE#         188
+  C:080FH         LINE#         190
+  C:0812H         LINE#         191
+  C:0815H         LINE#         192
+  C:0815H         LINE#         193
+  C:0818H         LINE#         194
+  C:081EH         LINE#         195
+  C:0821H         LINE#         196
+  C:0823H         LINE#         197
+  C:0825H         LINE#         198
+  C:0827H         LINE#         199
+  C:0829H         LINE#         200
+  C:082BH         LINE#         201
+  C:082DH         LINE#         202
+  C:082FH         LINE#         203
+  C:082FH         LINE#         204
+  C:082FH         LINE#         205
+  C:082FH         LINE#         206
+  C:0832H         LINE#         207
+  C:0838H         LINE#         208
+  C:083BH         LINE#         209
+  C:083DH         LINE#         210
+  C:083FH         LINE#         211
+  C:0841H         LINE#         212
+  C:0843H         LINE#         213
+  C:0845H         LINE#         214
+  C:0847H         LINE#         215
+  C:0849H         LINE#         216
+  C:0849H         LINE#         217
+  C:0849H         LINE#         218
+  C:0849H         LINE#         219
+  C:084CH         LINE#         220
+  C:0852H         LINE#         221
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 7
+
+
+  C:0855H         LINE#         222
+  C:0857H         LINE#         223
+  C:0859H         LINE#         224
+  C:085BH         LINE#         225
+  C:085DH         LINE#         226
+  C:085FH         LINE#         227
+  C:0861H         LINE#         228
+  C:0863H         LINE#         229
+  C:0863H         LINE#         230
+  C:0863H         LINE#         231
+  C:0863H         LINE#         232
+  C:0866H         LINE#         233
+  C:086CH         LINE#         234
+  C:086FH         LINE#         235
+  C:0871H         LINE#         236
+  C:0873H         LINE#         237
+  C:0875H         LINE#         238
+  C:0877H         LINE#         239
+  C:0879H         LINE#         240
+  C:087BH         LINE#         241
+  C:087DH         LINE#         242
+  C:087DH         LINE#         243
+  C:087DH         LINE#         244
+  C:087DH         LINE#         245
+  C:0880H         LINE#         246
+  C:0886H         LINE#         247
+  C:0889H         LINE#         248
+  C:088BH         LINE#         249
+  C:088DH         LINE#         250
+  C:088FH         LINE#         251
+  C:0891H         LINE#         252
+  C:0893H         LINE#         253
+  C:0895H         LINE#         254
+  C:0897H         LINE#         255
+  C:0897H         LINE#         256
+  C:0897H         LINE#         257
+  C:0897H         LINE#         258
+  C:089AH         LINE#         259
+  C:08A0H         LINE#         260
+  C:08A3H         LINE#         261
+  C:08A5H         LINE#         262
+  C:08A7H         LINE#         263
+  C:08A9H         LINE#         264
+  C:08ABH         LINE#         265
+  C:08ADH         LINE#         266
+  C:08AFH         LINE#         267
+  C:08B1H         LINE#         268
+  C:08B1H         LINE#         269
+  C:08B1H         LINE#         270
+  C:08B1H         LINE#         271
+  C:08B4H         LINE#         272
+  C:08BAH         LINE#         273
+  C:08BDH         LINE#         274
+  C:08BFH         LINE#         275
+  C:08C1H         LINE#         276
+  C:08C3H         LINE#         277
+  C:08C5H         LINE#         278
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  06/10/2020  18:50:59  PAGE 8
+
+
+  C:08C7H         LINE#         279
+  C:08C9H         LINE#         280
+  C:08CBH         LINE#         281
+  C:08CBH         LINE#         282
+  C:08CBH         LINE#         283
+  C:08CBH         LINE#         284
+  C:08CEH         LINE#         285
+  C:08D4H         LINE#         286
+  C:08D7H         LINE#         287
+  C:08D9H         LINE#         288
+  C:08DBH         LINE#         289
+  C:08DDH         LINE#         290
+  C:08DFH         LINE#         291
+  C:08E1H         LINE#         292
+  C:08E3H         LINE#         293
+  C:08E5H         LINE#         294
+  C:08E5H         LINE#         295
+  C:08E5H         LINE#         296
+  C:08E5H         LINE#         297
+  C:08E8H         LINE#         298
+  C:08EEH         LINE#         299
+  C:08F1H         LINE#         300
+  C:08F3H         LINE#         301
+  C:08F5H         LINE#         302
+  C:08F7H         LINE#         303
+  C:08F9H         LINE#         304
+  C:08FBH         LINE#         305
+  C:08FDH         LINE#         306
+  C:08FFH         LINE#         307
+  C:08FFH         LINE#         308
+  C:08FFH         LINE#         309
+  C:08FFH         LINE#         310
+  C:0902H         LINE#         311
+  C:0905H         LINE#         312
+  C:0908H         LINE#         313
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TICTACTOE
+
+  -------         MODULE        ?C?SLCMP
+  C:0AF9H         PUBLIC        ?C?SLCMP
+  -------         ENDMOD        ?C?SLCMP
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0335H BYTE (40%) *
+******************************************************************************
+
+Program Size: data=13.0 xdata=0 code=858
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
